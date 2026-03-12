@@ -1,7 +1,13 @@
 services:
-  - type: worker
-    name: telegram-button-bot
-    runtime: python
+  - type: web
+    name: telegram-channel-buttons-bot
+    env: python
+    region: oregon          # or frankfurt if you're closer to Europe/Africa
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python bot.py
-    plan: free
+    envVars:
+      - key: BOT_TOKEN
+        sync: false           # set this manually in dashboard
+      - key: PYTHONUNBUFFERED
+        value: "1"
